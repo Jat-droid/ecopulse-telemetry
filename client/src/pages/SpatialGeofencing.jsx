@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-const SOCKET_SERVER_URL = "http://localhost:5000";
+const SOCKET_SERVER_URL = import.meta.env.VITE_API_URL;
 
 export default function SpatialGeofencing() {
   const delhiCenter = [28.6139, 77.2090];

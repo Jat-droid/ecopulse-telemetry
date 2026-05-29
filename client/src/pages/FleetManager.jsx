@@ -12,7 +12,7 @@ export default function FleetManager() {
 
   const fetchVehicles = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/vehicles');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/vehicles`);
       setVehicles(res.data);
     } catch (err) {
       console.error("Failed to fetch vehicles:", err);
@@ -22,7 +22,7 @@ export default function FleetManager() {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/vehicles', newVehicle);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/vehicles`, newVehicle);
       fetchVehicles();
       setNewVehicle({ vehicleId: '', model: '', maxBatteryCapacityKwh: 100 });
     } catch (err) {
@@ -32,7 +32,7 @@ export default function FleetManager() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/vehicles/${id}`);
+ await axios.delete(`${import.meta.env.VITE_API_URL}/api/vehicles/${id}`);
       fetchVehicles();
     } catch (err) {
       console.error("Failed to delete vehicle:", err);
