@@ -94,7 +94,11 @@ export default function Login() {
               <Shield className="text-indigo-400" size={20} />
               <h2 className="text-sm font-bold text-slate-300 font-mono uppercase tracking-widest">Secure Gateway</h2>
             </div>
-
+{/* INTERVIEWER HINT BOX */}
+            <div className="mb-6 p-3 bg-indigo-500/5 border border-indigo-500/20 rounded-xl flex items-center gap-3 text-indigo-300 text-[10px] font-mono justify-center">
+               <Info size={14} />
+               <span>Demo: <b>admin@ecopulse.com</b> / <b>admin123</b></span>
+            </div>
             {error && (
               <div className="mb-6 p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs font-mono text-center">
                 {error}
