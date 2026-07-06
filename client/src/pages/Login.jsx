@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Zap, Lock, Mail, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Shield, Zap, Lock, Mail, ArrowLeft, RefreshCw, Info } from 'lucide-react';
 
 export default function Login() {
   // Mode switcher: 'login' or 'forgot' or 'resetSuccess'
