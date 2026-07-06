@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Zap, Lock, Mail, ArrowLeft, RefreshCw, Info } from 'lucide-react';
+import { Shield, Zap, Lock, Mail, ArrowLeft, RefreshCw } from 'lucide-react';
 
 export default function Login() {
   // Mode switcher: 'login' or 'forgot' or 'resetSuccess'
   const [mode, setMode] = useState('login');
   
-  // Form input states
+  // Form input states (initialized clean and empty)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -24,14 +24,16 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+    const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         email,
         password
       });
 
+      // Securely store credentials across page reloads
       localStorage.setItem('ecopulse_token', res.data.token);
       localStorage.setItem('ecopulse_user', JSON.stringify(res.data.user));
       
+      // Force immediate redirect to the authenticated frame
       navigate('/', { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || 'Authentication link broken. Check backend services.');
@@ -52,7 +54,8 @@ export default function Login() {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/reset-password`, {
+      // Connects to your backend authorization routes
+      await axios.post('http://localhost:5000/api/auth/reset-password', {
         email,
         newPassword
       });
@@ -91,13 +94,11 @@ export default function Login() {
               <Shield className="text-indigo-400" size={20} />
               <h2 className="text-sm font-bold text-slate-300 font-mono uppercase tracking-widest">Secure Gateway</h2>
             </div>
-
-            {/* INTERVIEWER HINT BOX */}
+{/* INTERVIEWER HINT BOX */}
             <div className="mb-6 p-3 bg-indigo-500/5 border border-indigo-500/20 rounded-xl flex items-center gap-3 text-indigo-300 text-[10px] font-mono justify-center">
                <Info size={14} />
                <span>Demo: <b>admin@ecopulse.com</b> / <b>admin123</b></span>
             </div>
-
             {error && (
               <div className="mb-6 p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs font-mono text-center">
                 {error}
